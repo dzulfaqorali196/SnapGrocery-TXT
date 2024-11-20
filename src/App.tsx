@@ -7,6 +7,7 @@ import { AuthPage } from './components/auth/AuthPage';
 import { ApiDocsPage } from './components/docs/ApiDocsPage';
 import { ProtectedRoute } from './components/routes/ProtectedRoute';
 import { AuthCallback } from './components/auth/AuthCallback';
+import { ComingSoonPage } from './components/common/ComingSoonPage';
 
 function App() {
   return (
@@ -30,7 +31,7 @@ function App() {
               path="/capture"
               element={
                 <ProtectedRoute>
-                  <div>Capture Page (Coming Soon)</div>
+                  <ComingSoonPage title="Capture Feature Coming Soon" />
                 </ProtectedRoute>
               }
             />
@@ -38,7 +39,7 @@ function App() {
               path="/upload"
               element={
                 <ProtectedRoute>
-                  <div>Upload Page (Coming Soon)</div>
+                  <ComingSoonPage title="Upload Feature Coming Soon" />
                 </ProtectedRoute>
               }
             />
@@ -46,7 +47,7 @@ function App() {
               path="/profile"
               element={
                 <ProtectedRoute>
-                  <div>Profile Page (Coming Soon)</div>
+                  <ComingSoonPage title="Profile Page Coming Soon" />
                 </ProtectedRoute>
               }
             />
