@@ -6,6 +6,7 @@ import { HomePage } from './components/home/HomePage';
 import { AuthPage } from './components/auth/AuthPage';
 import { ApiDocsPage } from './components/docs/ApiDocsPage';
 import { ProtectedRoute } from './components/routes/ProtectedRoute';
+import { AuthCallback } from './components/auth/AuthCallback';
 
 function App() {
   return (
@@ -49,6 +50,7 @@ function App() {
                 </ProtectedRoute>
               }
             />
+            <Route path="/auth/callback" element={<AuthCallback />} />
           </Routes>
         </div>
       </AuthProvider>
