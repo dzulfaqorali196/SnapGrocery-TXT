@@ -48,6 +48,9 @@ export function useAuth() {
       password,
       options: {
         emailRedirectTo: `${window.location.origin}/auth/callback`,
+        data: {
+          email_confirm: false
+        }
       },
     });
     if (error) throw error;

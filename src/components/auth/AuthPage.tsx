@@ -19,14 +19,16 @@ export function AuthPage() {
     try {
       if (isLogin) {
         await signIn.withEmail(email, password);
-        toast.success('Logged in successfully!');
+        toast.success('Login berhasil!');
         navigate('/');
       } else {
         await signUp(email, password);
-        toast.success('Please check your email to verify your account');
+        toast.success('Akun berhasil dibuat! Silakan login.');
+        setIsLogin(true);
       }
-    } catch (error) {
-      toast.error(isLogin ? 'Failed to login' : 'Failed to sign up');
+    } catch (error: any) {
+      const errorMessage = error.message || (isLogin ? 'Gagal login' : 'Gagal membuat akun');
+      toast.error(errorMessage);
       console.error('Auth error:', error);
     } finally {
       setLoading(false);
