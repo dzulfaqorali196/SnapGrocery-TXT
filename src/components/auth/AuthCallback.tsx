@@ -10,29 +10,36 @@ export function AuthCallback() {
   useEffect(() => {
     const handleCallback = async () => {
       try {
-        // Ambil hash dari URL (berisi token)
-        const hashParams = new URLSearchParams(window.location.hash.substring(1));
-        const accessToken = hashParams.get('access_token');
-
-        if (!accessToken) {
-          throw new Error('Tidak ada access token');
+        // Cek apakah ada error dari Supabase
+        const error = new URLSearchParams(window.location.search).get('error');
+        const errorDescription = new URLSearchParams(window.location.search).get('error_description');
+        
+        if (error) {
+          throw new Error(errorDescription || 'Authentication error');
         }
 
-        // Set session dengan token yang diterima
-        const { data, error } = await supabase.auth.setSession({
-          access_token: accessToken,
-          refresh_token: hashParams.get('refresh_token') || '',
-        });
+        // Cek session
+        const { data: { session }, error: sessionError } = await supabase.auth.getSession();
+        
+        if (sessionError) throw sessionError;
 
-        if (error) throw error;
-
-        if (data.session) {
-          toast.success('Login berhasil!');
-          navigate('/');
+        if (session) {
+          // Cek apakah ini dari signup
+          const isSignUp = window.location.href.includes('type=signup');
+          
+          if (isSignUp) {
+            toast.success('Akun berhasil dibuat! Silakan cek email Anda untuk verifikasi.');
+            navigate('/auth');
+          } else {
+            toast.success('Login berhasil!');
+            navigate('/');
+          }
+        } else {
+          navigate('/auth');
         }
       } catch (error) {
         console.error('Error dalam callback auth:', error);
-        toast.error('Gagal menyelesaikan proses login');
+        toast.error(error instanceof Error ? error.message : 'Gagal menyelesaikan proses autentikasi');
         navigate('/auth');
       }
     };
