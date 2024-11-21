@@ -5,6 +5,11 @@ import react from '@vitejs/plugin-react';
 export default defineConfig({
   plugins: [react()],
   optimizeDeps: {
-    exclude: ['lucide-react'],
+    include: ['swagger-ui-react', 'swagger-ui-dist'],
+  },
+  resolve: {
+    alias: {
+      'swagger-ui-dist': 'swagger-ui-dist',
+    },
   },
 });

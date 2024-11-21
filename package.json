@@ -18,7 +18,9 @@
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-hot-toast": "^2.4.1",
-    "react-router-dom": "^6.22.2"
+    "react-router-dom": "^6.22.2",
+    "swagger-ui-dist": "^5.18.2",
+    "swagger-ui-react": "^5.18.2"
   },
   "devDependencies": {
     "@eslint/js": "^9.9.1",

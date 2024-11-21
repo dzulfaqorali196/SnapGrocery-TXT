@@ -4,10 +4,10 @@ import { AuthProvider } from './components/auth/AuthProvider';
 import { Navbar } from './components/layout/Navbar';
 import { HomePage } from './components/home/HomePage';
 import { AuthPage } from './components/auth/AuthPage';
-import { ApiDocsPage } from './components/docs/ApiDocsPage';
 import { ProtectedRoute } from './components/routes/ProtectedRoute';
 import { AuthCallback } from './components/auth/AuthCallback';
 import { ComingSoonPage } from './components/common/ComingSoonPage';
+import { SwaggerDocs } from './components/docs/SwaggerDocs';
 
 function App() {
   return (
@@ -23,7 +23,7 @@ function App() {
               path="/api-docs"
               element={
                 <ProtectedRoute>
-                  <ApiDocsPage />
+                  <SwaggerDocs />
                 </ProtectedRoute>
               }
             />
