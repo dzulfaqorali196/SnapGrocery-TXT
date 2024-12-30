@@ -1,5 +1,26 @@
-import SwaggerUI from 'swagger-ui-react';
-import 'swagger-ui-dist/swagger-ui.css';
+import { useEffect } from 'react'
+import SwaggerUIBundle from 'swagger-ui-dist/swagger-ui-bundle'
+import 'swagger-ui-dist/swagger-ui.css'
+
+export function SwaggerDocs() {
+  useEffect(() => {
+    const ui = SwaggerUIBundle({
+      dom_id: '#swagger-ui',
+      spec: swaggerConfig,
+      docExpansion: 'list',
+      deepLinking: true
+    })
+
+    return () => {
+      // Cleanup if needed
+      if (ui && typeof ui.unmount === 'function') {
+        ui.unmount()
+      }
+    }
+  }, [])
+
+  return <div id="swagger-ui" className="swagger-container" />
+}
 
 const swaggerConfig = {
   openapi: '3.0.0',
@@ -813,6 +834,51 @@ const swaggerConfig = {
           }
         }
       }
+    },
+    '/shopping-lists/{id}': {
+      patch: {
+        tags: ['Shopping Lists'],
+        summary: 'Update status daftar belanja',
+        security: [{ bearerAuth: [] }],
+        parameters: [
+          {
+            name: 'id',
+            in: 'path',
+            required: true,
+            schema: {
+              type: 'string'
+            }
+          }
+        ],
+        requestBody: {
+          required: true,
+          content: {
+            'application/json': {
+              schema: {
+                type: 'object',
+                properties: {
+                  status: {
+                    type: 'string',
+                    enum: ['active', 'completed']
+                  }
+                }
+              }
+            }
+          }
+        },
+        responses: {
+          '200': {
+            description: 'Status berhasil diupdate',
+            content: {
+              'application/json': {
+                schema: {
+                  $ref: '#/components/schemas/ShoppingList'
+                }
+              }
+            }
+          }
+        }
+      }
     }
   },
   components: {
@@ -836,12 +902,4 @@ const swaggerConfig = {
       }
     }
   }
-};
-
-export function SwaggerDocs() {
-  return (
-    <div className="swagger-container">
-      <SwaggerUI spec={swaggerConfig} />
-    </div>
-  );
-} 
+}; 

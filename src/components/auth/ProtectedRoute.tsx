@@ -1,5 +1,5 @@
 import { Navigate, Outlet } from 'react-router-dom';
-import { useAuthContext } from '../auth/AuthProvider';
+import { useAuthContext } from './AuthProvider';
 import { Loader2 } from 'lucide-react';
 
 export function ProtectedRoute() {
@@ -18,4 +18,4 @@ export function ProtectedRoute() {
   }
 
   return <Outlet />;
-}
+} 

@@ -6,6 +6,7 @@ import { HomePage } from './components/home/HomePage';
 import { AuthPage } from './components/auth/AuthPage';
 import { ProtectedRoute } from './components/routes/ProtectedRoute';
 import { AuthCallback } from './components/auth/AuthCallback';
+import { ImageUpload } from './components/image/ImageUpload';
 import { ComingSoonPage } from './components/common/ComingSoonPage';
 import { SwaggerDocs } from './components/docs/SwaggerDocs';
 
@@ -19,39 +20,15 @@ function App() {
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/auth" element={<AuthPage />} />
-            <Route
-              path="/api-docs"
-              element={
-                <ProtectedRoute>
-                  <SwaggerDocs />
-                </ProtectedRoute>
-              }
-            />
-            <Route
-              path="/capture"
-              element={
-                <ProtectedRoute>
-                  <ComingSoonPage title="Capture Feature Coming Soon" />
-                </ProtectedRoute>
-              }
-            />
-            <Route
-              path="/upload"
-              element={
-                <ProtectedRoute>
-                  <ComingSoonPage title="Upload Feature Coming Soon" />
-                </ProtectedRoute>
-              }
-            />
-            <Route
-              path="/profile"
-              element={
-                <ProtectedRoute>
-                  <ComingSoonPage title="Profile Page Coming Soon" />
-                </ProtectedRoute>
-              }
-            />
             <Route path="/auth/callback" element={<AuthCallback />} />
+            
+            {/* Protected Routes */}
+            <Route element={<ProtectedRoute />}>
+              <Route path="/capture" element={<ImageUpload />} />
+              <Route path="/upload" element={<ImageUpload />} />
+              <Route path="/api-docs" element={<SwaggerDocs />} />
+              <Route path="/profile" element={<ComingSoonPage title="Profile Page Coming Soon" />} />
+            </Route>
           </Routes>
         </div>
       </AuthProvider>
